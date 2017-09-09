@@ -7,12 +7,13 @@ local tab_concat = table.concat
 local _M = {}
 
 function _M.insert(game_tab)
-    local sql = "INSERT INTO game (openId, gameType, teamType, beginTime, endTime, deadline, address, " ..
-                "limitNum, pic, creator, creatorPhone, addtime) VALUES (%s, %d, %s, %s, %s, %s, %s, %d, %s, %s, %s, %s)"
+    local sql = "INSERT INTO game (openId, gameType, gameName, teamType, beginTime, endTime, deadline, address, " ..
+                "limitNum, pic, creator, creatorPhone, addtime) VALUES (%s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s, %s)"
 
     local params = {}
     tab_insert(params, game_tab.openid)
     tab_insert(params, game_tab.game_type)
+    tab_insert(params, game_tab.game_name)
     tab_insert(params, game_tab.team_type)
     tab_insert(params, game_tab.begin_time)
     tab_insert(params, game_tab.end_time)
@@ -34,11 +35,12 @@ end
 
 
 function _M.update(game_tab)
-    local sql = "UPDATE game SET gameType=%d, teamType=%s, beginTime=%s, endTime=%s, deadline=%s, " ..
+    local sql = "UPDATE game SET gameType=%d, gameName=%s, teamType=%s, beginTime=%s, endTime=%s, deadline=%s, " ..
                 "address=%s, limitNum=%d, pic=%s, creator=%s, creatorPhone=%s, addtime=%s WHERE id=%d AND openId=%s"
 
     local params = {}
     tab_insert(params, game_tab.game_type)
+    tab_insert(params, game_tab.game_name)
     tab_insert(params, game_tab.team_type)
     tab_insert(params, game_tab.begin_time)
     tab_insert(params, game_tab.end_time)

@@ -49,7 +49,7 @@ local function query(sql, params)
         return nil
     end
 
-    log.debug(sql)
+    log.crit(sql)
 
     return execute(sql)
 end

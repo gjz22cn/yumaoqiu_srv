@@ -122,7 +122,11 @@ function _M.create(self, params)
     local res = nil
     if str_sub(ngx_var.content_type, 1, 19) == "multipart/form-data" then
         res = multipart.parser(params.__body, config.get('pic_dir'))
-        res.filenames = res.filenames[1]
+        if res.filenames then
+            res.filenames = res.filenames[1]
+        else
+            res.filenames = ""
+        end
     else
         res = params
         res.filenames = ""
@@ -136,6 +140,7 @@ function _M.create(self, params)
     end
 
     local game_type = tonumber(res.gameType)
+    local game_name = res.gameName
     local team_type = res.teamType
     local begin_time = res.beginTime
     local end_time = res.endTime
@@ -162,7 +167,7 @@ function _M.create(self, params)
         team_type_list = nil
     end
 
-    if not game_type or not begin_time or not end_time or not deadline or
+    if not game_type or not game_name or not begin_time or not end_time or not deadline or
         not address or not limit_num or not creator or not creator_phone or
         not constant.GAME_TYPE[game_type] or (game_type == 6 and not team_type_list) or
         not res.filenames then
@@ -173,7 +178,7 @@ function _M.create(self, params)
 
     -- 插入数据库
     local game_tab = {
-        openid=openid, game_type=game_type, team_type=team_type, begin_time=begin_time,
+        openid=openid, game_type=game_type, game_name=game_name, team_type=team_type, begin_time=begin_time,
         end_time=end_time, deadline=deadline, address=address, limit_num=limit_num,
         pic=res.filenames, creator=creator, creator_phone=creator_phone, addtime=localtime()
     }
@@ -217,7 +222,11 @@ function _M.update(self, params)
     local res = nil
     if str_sub(ngx_var.content_type, 1, 19) == "multipart/form-data" then
         res = multipart.parser(params.__body, config.get('pic_dir'))
-        res.filenames = res.filenames[1]
+        if res.filenames then
+            res.filenames = res.filenames[1]
+        else
+            res.filenames = ""
+        end
     else
         res = params
         res.filenames = ""
@@ -232,6 +241,7 @@ function _M.update(self, params)
 
     local id = tonumber(res.id)
     local game_type = tonumber(res.gameType)
+    local game_name = res.gameName
     local team_type = res.teamType
     local begin_time = res.beginTime
     local end_time = res.endTime
@@ -258,7 +268,7 @@ function _M.update(self, params)
         team_type_list = nil
     end
 
-    if not game_type or not begin_time or not end_time or not deadline or
+    if not game_type or not game_name or not begin_time or not end_time or not deadline or
         not address or not limit_num or not creator or not creator_phone or
         not constant.GAME_TYPE[game_type] or (game_type == 6 and not team_type_list) or
         not res.filenames or not id then
@@ -269,7 +279,7 @@ function _M.update(self, params)
 
     -- 更新数据库
     local game_tab = {
-        id=id, openid=openid, game_type=game_type, team_type=team_type, begin_time=begin_time,
+        id=id, openid=openid, game_type=game_type, game_name=game_name, team_type=team_type, begin_time=begin_time,
         end_time=end_time, deadline=deadline, address=address, limit_num=limit_num,
         pic=res.filenames, creator=creator, creator_phone=creator_phone, addtime=localtime()
     }
