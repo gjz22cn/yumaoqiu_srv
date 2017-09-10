@@ -71,5 +71,12 @@ function _M.delete_participant_num(db_trans, id, now)
     return ok
 end
 
+function _M.query_num(game_id)
+    local sql = "SELECT openId, name FROM participant WHERE gameId=%d ORDER BY addtime"
+
+    local params = {game_id}
+    return db.select(sql, params)
+end
+
 
 return _M

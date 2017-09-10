@@ -14,6 +14,7 @@ local utils_user = require "utils.user"
 local get_current_user = utils_user.get_current_user
 local is_login = utils_user.is_login
 local m_game = require "model.game"
+local m_participant = require "model.participant"
 local m_club_participant = require "model.club_participant"
 local localtime = ngx.localtime
 local multipart = require "utils.multipart"
@@ -81,6 +82,11 @@ function _M.router(self)
             end,
             ["/wx/club/participant/query_num"] = function(params)
                 local resp_tab = self:participant_club_query_num(params)
+                local resp = cjson.encode(resp_tab)
+                resp_send(resp)
+            end,
+            ["/wx/game/participant/query_num"] = function(params)
+                local resp_tab = self:participant_game_query_num(params)
                 local resp = cjson.encode(resp_tab)
                 resp_send(resp)
             end,
@@ -871,6 +877,55 @@ function _M.participant_club_query_num(self, params)
 
     -- 查询数据库
     local res = m_club_participant.query_num(game_id)
+    if not res then
+        resp.code = '600105'
+    else
+        resp.code = '000000'
+        resp.result.data = res
+    end
+
+    resp.msg = response.get_errmsg(resp.code)
+
+    return resp
+end
+
+
+
+function _M.participant_game_query_num(self, params)
+    local resp = {}
+    resp.result = {}
+
+    -- referer检查
+    if not waf.wx_referer_check() then
+        log.err("不是来自微信小程序的请求")
+        ngx.status = ngx.HTTP_FORBIDDEN
+        resp.code = '403000'
+        resp.msg = response.get_errmsg(resp.code)
+        return resp
+    end
+
+    local current_user = get_current_user()
+    if not current_user then
+        log.err("未登陆")
+        ngx.status = ngx.HTTP_FORBIDDEN
+        resp.code = '403000'
+        resp.msg = response.get_errmsg(resp.code)
+        return resp
+    end
+
+    local openid = current_user.openid
+
+    -- 参数解析
+    local game_id = tonumber(params.gameId)
+
+    if not game_id then
+        resp.code = '400001'
+        resp.msg = response.get_errmsg(resp.code)
+        return resp
+    end
+
+    -- 查询数据库
+    local res = m_participant.query_num(game_id)
     if not res then
         resp.code = '600105'
     else
