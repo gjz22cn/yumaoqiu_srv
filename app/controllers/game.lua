@@ -155,6 +155,7 @@ function _M.create(self, params)
     local limit_num = tonumber(res.limitNum)
     local creator = res.creator
     local creator_phone = res.creatorPhone
+    local comment = res.comment
 
     -- 参数校验
     local team_type_list = nil
@@ -176,7 +177,7 @@ function _M.create(self, params)
     if not game_type or not game_name or not begin_time or not end_time or not deadline or
         not address or not limit_num or not creator or not creator_phone or
         not constant.GAME_TYPE[game_type] or (game_type == 6 and not team_type_list) or
-        not res.filenames then
+        not res.filenames or not comment then
         resp.code = '400001'
         resp.msg = response.get_errmsg(resp.code)
         return resp
@@ -185,7 +186,7 @@ function _M.create(self, params)
     -- 插入数据库
     local game_tab = {
         openid=openid, game_type=game_type, game_name=game_name, team_type=team_type, begin_time=begin_time,
-        end_time=end_time, deadline=deadline, address=address, limit_num=limit_num,
+        end_time=end_time, deadline=deadline, address=address, limit_num=limit_num, comment=comment,
         pic=res.filenames, creator=creator, creator_phone=creator_phone, addtime=localtime()
     }
 
@@ -256,6 +257,7 @@ function _M.update(self, params)
     local limit_num = tonumber(res.limitNum)
     local creator = res.creator
     local creator_phone = res.creatorPhone
+    local comment = res.comment
 
     -- 参数校验
     local team_type_list = nil
@@ -277,7 +279,7 @@ function _M.update(self, params)
     if not game_type or not game_name or not begin_time or not end_time or not deadline or
         not address or not limit_num or not creator or not creator_phone or
         not constant.GAME_TYPE[game_type] or (game_type == 6 and not team_type_list) or
-        not res.filenames or not id then
+        not res.filenames or not id or not comment then
         resp.code = '400001'
         resp.msg = response.get_errmsg(resp.code)
         return resp
@@ -286,7 +288,7 @@ function _M.update(self, params)
     -- 更新数据库
     local game_tab = {
         id=id, openid=openid, game_type=game_type, game_name=game_name, team_type=team_type, begin_time=begin_time,
-        end_time=end_time, deadline=deadline, address=address, limit_num=limit_num,
+        end_time=end_time, deadline=deadline, address=address, limit_num=limit_num, comment=comment,
         pic=res.filenames, creator=creator, creator_phone=creator_phone, addtime=localtime()
     }
 
@@ -585,6 +587,7 @@ function _M.query_by_id(self, params)
         return resp
     end
 
+    --[[
     local current_user = get_current_user()
     if not current_user then
         log.err("未登陆")
@@ -595,6 +598,7 @@ function _M.query_by_id(self, params)
     end
 
     local openid = current_user.openid
+    ]]
 
     -- 参数解析
     local id = tonumber(params.id)

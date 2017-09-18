@@ -7,8 +7,8 @@ local tab_concat = table.concat
 local _M = {}
 
 function _M.insert(game_tab)
-    local sql = "INSERT INTO game (openId, gameType, gameName, teamType, beginTime, endTime, deadline, address, " ..
-                "limitNum, pic, creator, creatorPhone, addtime) VALUES (%s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s, %s)"
+    local sql = "INSERT INTO game (openId, gameType, gameName, teamType, beginTime, endTime, deadline, address, limitNum, " ..
+                "pic, creator, creatorPhone, addtime, comment) VALUES (%s, %d, %s, %s, %s, %s, %s, %s, %d, %s, %s, %s, %s, %s)"
 
     local params = {}
     tab_insert(params, game_tab.openid)
@@ -24,6 +24,7 @@ function _M.insert(game_tab)
     tab_insert(params, game_tab.creator)
     tab_insert(params, game_tab.creator_phone)
     tab_insert(params, game_tab.addtime)
+    tab_insert(params, game_tab.comment)
 
     local ok, errno = db.insert(sql, params)
     if not ok then
@@ -36,7 +37,7 @@ end
 
 function _M.update(game_tab)
     local sql = "UPDATE game SET gameType=%d, gameName=%s, teamType=%s, beginTime=%s, endTime=%s, deadline=%s, " ..
-                "address=%s, limitNum=%d, pic=%s, creator=%s, creatorPhone=%s, addtime=%s WHERE id=%d AND openId=%s"
+                "address=%s, limitNum=%d, pic=%s, creator=%s, creatorPhone=%s, addtime=%s, comment=%s WHERE id=%d AND openId=%s"
 
     local params = {}
     tab_insert(params, game_tab.game_type)
@@ -51,6 +52,7 @@ function _M.update(game_tab)
     tab_insert(params, game_tab.creator)
     tab_insert(params, game_tab.creator_phone)
     tab_insert(params, game_tab.addtime)
+    tab_insert(params, game_tab.comment)
     tab_insert(params, game_tab.id)
     tab_insert(params, game_tab.openid)
 

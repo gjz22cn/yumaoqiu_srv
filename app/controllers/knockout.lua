@@ -402,6 +402,7 @@ function _M.list2(self, params)
         return resp
     end
 
+    --[[
     local current_user = get_current_user()
     if not current_user then
         log.err("未登陆")
@@ -412,6 +413,7 @@ function _M.list2(self, params)
     end
 
     local openid = current_user.openid
+    ]]
 
     -- 参数解析
     local game_id = tonumber(params.gameId)
