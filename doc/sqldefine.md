@@ -7,7 +7,14 @@
 |act_add1  |varchar(128)|活动地址1||
 |act_add2  |varchar(128)|活动地址2||
 |act_add3  |varchar(128)|活动地址3||
-|uid    |int   |管理员ID|foreign key|
+|user_id    |int   |管理员ID|foreign key|
+|mem_num    |int   |成员数目|default: 1|
+
+#### 社团成员(corp_men)
+|字段   |类型  |说明   |备注   |
+|:-----|:-----|:------|:------|
+|corp_id    |int   | 社团ID|foreign key|
+|user_id    |int   | 用户ID|foreign key|
 
 #### 计分卡 (score_card)
 |字段   |类型  |说明   |备注   |
