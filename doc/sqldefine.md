@@ -3,6 +3,11 @@
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null auto_increment |
+|name  |varchar(32)|名称|not null|
+|act_add1  |varchar(128)|活动地址1||
+|act_add2  |varchar(128)|活动地址2||
+|act_add3  |varchar(128)|活动地址3||
+|uid    |int   |管理员ID|foreign key|
 
 #### 计分卡 (score_card)
 |字段   |类型  |说明   |备注   |
