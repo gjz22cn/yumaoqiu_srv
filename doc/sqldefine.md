@@ -39,6 +39,7 @@
 |name  |varchar(32)|名称|not null|
 |type1|ENUM('ranking','full-loop','combat-loop')|类型1：排名、循环、AB队循环||
 |type2|ENUM('single','doubles','team',<br>'m-s','f-s',<br>'m-d','f-d','mix-d')|类型2：<br>单打、双打、团体、<br>男单、女单、<br>男双、女双、混双||
+|user_id    |int   | 用户ID|foreign key, not null|
 |corp_id    |int   | 社团ID|foreign key<br>default: 1, 表示不属于任何社团|
 
 ### 计分卡成员(card_mem)
