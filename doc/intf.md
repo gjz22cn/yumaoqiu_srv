@@ -24,8 +24,8 @@
 |/score_item/[id]|GET|获取计分项信息||
 |/score_item/[id]|PUT|修改计分项信息||
 |/score_item/[id]|DELETE|删除计分项||
-|/score_item/[id]/confirml_1|POST|{user_id: 1}||
-|/score_item/[id]/confirml_2|POST|{user_id: 1}||
-|/score_item/[id]/confirmr_1|POST|{user_id: 1}||
-|/score_item/[id]/confirmr_2|POST|{user_id: 1}||
+|/score_item/[id]/confirml_1|POST|左边确认1|{user_id: 1}||
+|/score_item/[id]/confirml_2|POST|左边确认2|{user_id: 1}||
+|/score_item/[id]/confirmr_1|POST|右边确认1|{user_id: 1}||
+|/score_item/[id]/confirmr_2|POST|右边确认2|{user_id: 1}||
 
