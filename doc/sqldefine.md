@@ -1,5 +1,4 @@
-## 1. 数据库定义
-#### 社团 (corporation)
+### 社团 (corporation)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null auto_increment |
@@ -10,13 +9,30 @@
 |user_id    |int   |管理员ID|foreign key|
 |mem_num    |int   |成员数目|default: 1|
 
-#### 社团成员(corp_mem)
+### 社团成员(corp_mem)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |corp_id    |int   | 社团ID|foreign key|
 |user_id    |int   | 用户ID|foreign key|
 
-#### 计分卡 (score_card)
+### 社团活动(activity)
+|字段   |类型  |说明   |备注   |
+|:-----|:-----|:------|:------|
+|id    |int   | |primary key<br>not null auto_increment|
+|date  |time|活动日期|年-月-日|
+|start |time|开始时间|时：分|
+|end |time|结束时间|时：分|
+|addr |varchar(128)|活动地址||
+|comment|varchar(256)|备注||
+
+### 活动成员(act_mem)
+|字段   |类型  |说明   |备注   |
+|:-----|:-----|:------|:------|
+|act_id    |int   | 活动ID|foreign key|
+|user_id    |int   | 用户ID|foreign key|
+|people    |int   | 报名人数|default：1|
+
+### 计分卡 (score_card)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   ||primary key<br>not null auto_increment |
@@ -25,13 +41,13 @@
 |type2|ENUM('single','doubles','team',<br>'m-s','f-s',<br>'m-d','f-d','mix-d')|类型2：<br>单打、双打、团体、<br>男单、女单、<br>男双、女双、混双||
 |corp_id    |int   | 社团ID|foreign key<br>default: 1, 表示不属于任何社团|
 
-#### 计分卡成员(card_mem)
+### 计分卡成员(card_mem)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |card_id    |int   | 记分卡ID|foreign key|
 |user_id    |int   | 用户ID|foreign key|
 
-#### 计分条目表 (score_ori)
+### 计分条目表 (score_ori)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null auto_increment|
