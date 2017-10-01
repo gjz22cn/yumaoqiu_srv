@@ -48,7 +48,7 @@
 |card_id    |int   | 记分卡ID|foreign key|
 |user_id    |int   | 用户ID|foreign key|
 
-### 计分条目表 (score_ori)
+### 计分条目表 (score_item)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null auto_increment|
