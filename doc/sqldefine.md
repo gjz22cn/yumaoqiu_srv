@@ -20,6 +20,7 @@
 |id    |int   | |primary key<br>not null auto_increment|
 |card_id    |int   | 积分卡id|foreign key<br>default: 1|
 |date  |time|比赛时间||
+|state|int|计分条目状态|0-未完成,1-完成,default:0|
 |state_l|ENUM('0','1','2')|左边状态|0-确认1,1-确认2,2-已确认|
 |state_r|ENUM('0','1','2')|右边状态|0-确认1,1-确认2,2-已确认|
 |namel_l|varchar(32)|左边选手1名称||
