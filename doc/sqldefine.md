@@ -2,10 +2,10 @@
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null, auto_increment |
-|openId    |int   | | |
-|phone  |varchar(11) | ||
+|openId |int |微信用户ID |unique|
+|phone  |varchar(11) |手机号 ||
 |password  |varchar(128) | ||
-|nickName  |varchar(128) | ||
+|nickName  |varchar(128) |微信昵称||
 |gender  |int(11) | ||
 |country  |varchar(32) | ||
 |province  |varchar(32) | ||
