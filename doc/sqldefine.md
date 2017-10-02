@@ -1,3 +1,19 @@
+### 用户 (users)
+|字段   |类型  |说明   |备注   |
+|:-----|:-----|:------|:------|
+|id    |int   | |primary key<br>not null auto_increment |
+|openId    |int   | | |
+|nickName  |varchar(128) | ||
+|gender  |int(11) | ||
+|country  |varchar(32) | ||
+|province  |varchar(32) | ||
+|city  |varchar(32) | ||
+|avatarUrl  |varchar(256) | ||
+|unionId  |varchar(32) | ||
+|appId  |varchar(32) | ||
+|addtime  |char(19) | ||
+|logintime  |char(19) | ||
+
 ### 社团 (corporation)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
