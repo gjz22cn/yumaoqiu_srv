@@ -1,8 +1,10 @@
 ### 用户 (users)
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
-|id    |int   | |primary key<br>not null auto_increment |
+|id    |int   | |primary key<br>not null, auto_increment |
 |openId    |int   | | |
+|phone  |varchar(11) | ||
+|password  |varchar(128) | ||
 |nickName  |varchar(128) | ||
 |gender  |int(11) | ||
 |country  |varchar(32) | ||
@@ -35,7 +37,7 @@
 |字段   |类型  |说明   |备注   |
 |:-----|:-----|:------|:------|
 |id    |int   | |primary key<br>not null auto_increment|
-|date  |time|活动日期|年-月-日|
+|date  |date|活动日期|年-月-日|
 |start |time|开始时间|时：分|
 |end |time|结束时间|时：分|
 |addr |varchar(128)|活动地址||
